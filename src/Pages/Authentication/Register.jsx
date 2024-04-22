@@ -117,7 +117,7 @@ const Register = () => {
       </Formik>
       <div className='flex gap-2 items-center jsutify-center pt-5'>
         <p>Already have an account </p>
-        <Button onClick={()=>navigate("/login")} >Login</Button>
+        <Button onClick={()=>navigate("/signin")} color="primary">Login</Button>
       </div>
       </>
   )

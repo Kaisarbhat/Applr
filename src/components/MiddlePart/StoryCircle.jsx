@@ -7,7 +7,7 @@ const StoryCircle = () => {
              <div className='flex flex-col items-center mr-4 cursor-pointer'>
           
           <Avatar style={{height:"4rem" , width: "4rem"}}
-           src =''
+           src ='https://images.pexels.com/photos/1557843/pexels-photo-1557843.jpeg?auto=compress&cs=tinysrgb&w=600'
            >
             <AddIcon  sx={{fontSize:"2rem"}}/>
            </Avatar>

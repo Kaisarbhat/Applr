@@ -1,6 +1,6 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { Button,TextField } from '@material-ui/core';
-import {Formik,Form,Field, ErrorMessage,validateYupSchema} from 'formik'
+import {Formik,Form,Field, ErrorMessage} from 'formik'
 import * as Yup from "yup";
 import {useNavigate} from 'react-router-dom';
 import { loginUserAction } from '../../Redux/Auth/auth_action';
@@ -11,8 +11,6 @@ const initialValues ={email:"",password:""};
 const validationSchema={email:Yup.string().email("Invalid Email").required("Email is Required"),
 password:Yup.string().min(6,"Password must be atleast 6 characters").required("Password is Required")};
 const Login = () => {
-  
-  const[formValue,setFormValue] = useState();
   const dispatch =  useDispatch();
   const navigate = useNavigate();
 
@@ -71,7 +69,7 @@ const Login = () => {
       </Formik>
       <div className='flex gap-2 items-center jsutify-center pt-5'>
         <p>Don't have an account ?</p>
-        <Button onClick={()=>navigate("/register")} >Register</Button>
+        <Button onClick={()=>navigate("/signup") }color="primary">Register</Button>
       </div>
     </>
   )
