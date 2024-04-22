@@ -3,19 +3,26 @@ import { Button,TextField,Radio,FormControl,FormControlLabel,FormLabel,RadioGrou
 import {Formik,Form, ErrorMessage,Field,validateYupSchema} from 'formik'
 import * as Yup from "yup";
 import {useNavigate} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { registerUserAction } from '../../Redux/Auth/auth_action';
 
 const initialValues ={firstName:"",lastName:"",email:"",password:"",gender:""};
 const validationSchema={email:Yup.string().email("Invalid Email").required("Email is Required"),
 password:Yup.string().min(6,"Password must be atleast 6 characters").required("Password is Required")};
+
+
 const Register = () => {
+
   const [gender, setGender] = React.useState('female');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleChange = (event) => {
     setGender(event.target.value);
   };
   const handleSubmit=(values)=>{
     values.gender = gender;
     console.log("Handle Submit ",values);
+    dispatch(registerUserAction({data:values}))
   }
   return (
     <>

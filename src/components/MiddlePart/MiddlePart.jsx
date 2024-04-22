@@ -19,11 +19,11 @@ const MiddlePart = () => {
       <section className='flex items-center p-5 rounded-b-md'>
         <div className='flex flex-col items-center mr-4 cursor-pointer'>
           
-        <Avatar sx={{width:'5rem',heigth:'5rem'}}
-         src =''
-         >
-          <AddIcon  sx={{fontSize:"3rem"}}/>
-         </Avatar>
+        <Avatar style={{height:"5rem" , width: "5rem"}}
+           src =''
+           >
+            <AddIcon  sx={{fontSize:"2rem"}}/>
+           </Avatar>
           <p>NEW</p>
            </div>
            {story.map((item)=>(<StoryCircle/>))}

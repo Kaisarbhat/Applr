@@ -13,7 +13,7 @@ const PostCard = () => {
     <Card className=''>
        <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar style={{ bgcolor: red[500] }} aria-label="recipe">
             R
           </Avatar>
         }

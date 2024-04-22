@@ -3,17 +3,22 @@ import { Button,TextField } from '@material-ui/core';
 import {Formik,Form,Field, ErrorMessage,validateYupSchema} from 'formik'
 import * as Yup from "yup";
 import {useNavigate} from 'react-router-dom';
+import { loginUserAction } from '../../Redux/Auth/auth_action';
+import { useDispatch } from 'react-redux';
+
+
 const initialValues ={email:"",password:""};
 const validationSchema={email:Yup.string().email("Invalid Email").required("Email is Required"),
 password:Yup.string().min(6,"Password must be atleast 6 characters").required("Password is Required")};
 const Login = () => {
+  
   const[formValue,setFormValue] = useState();
-  //const dispatch =  useDispatch();
+  const dispatch =  useDispatch();
   const navigate = useNavigate();
-
 
   const handleSubmit=(values)=>{
     console.log("Handle Submit ",values);
+    dispatch(loginUserAction({data:values}));
   }
   return (
     <>

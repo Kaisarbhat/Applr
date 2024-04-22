@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Grid} from '@mui/material';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import {useLocation,Routes,Route} from 'react-router-dom';
@@ -25,7 +25,7 @@ const HomePage = () => {
                         <Route path = "/profile/:id" element = {<Profile/>} />
                     </Routes>
             </Grid>
-            <Grid item lg={3} className='relative'>
+           {location.pathname ==="/" && <Grid item lg={3} className='relative'>
 
                 <div className=' sticky top-0 w-full'>
 
@@ -33,7 +33,7 @@ const HomePage = () => {
 
                 </div>
 
-            </Grid>
+            </Grid>}
       </Grid>
     </div>
   )

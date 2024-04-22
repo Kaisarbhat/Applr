@@ -1,3 +1,4 @@
+import React from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import ExploreIcon from '@mui/icons-material/Explore';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';

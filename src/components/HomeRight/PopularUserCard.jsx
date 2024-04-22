@@ -6,7 +6,7 @@ const PopularUserCard = () => {
     <div className=''>
         <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar Style={{ bgcolor: red[500] }} aria-label="recipe">
             R
           </Avatar>
         }
