@@ -10,10 +10,10 @@ const Authentication = () => {
   return (
     <div>
       <Grid container>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <img className="w-full h-full" src={image} alt="logo" />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <div className=" flex justify-center items-center h-full">
             <div className="px-4 w-4/5">
               <Card className="card p-8 ">

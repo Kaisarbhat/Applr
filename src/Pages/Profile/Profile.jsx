@@ -11,6 +11,7 @@ const tabs = [
   {value:"saved",name:"Saved"},
   {value:"repost",name:"RePost"},
 ];
+
 const posts = [1,1,1,1];
 const reels = [1,1,1,1];
 const saved = [1,1];

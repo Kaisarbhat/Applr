@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import { updateProfileAction } from '../../Redux/Auth/auth_action';
 import { IconButton, TextField } from '@material-ui/core';
 import CloseIcon from '@mui/icons-material/Close';
+import { useEffect } from 'react';
 
 const style = {
   position: 'absolute',
@@ -27,7 +28,10 @@ export default function ProfileModal({open ,handleClose}) {
   
   const handleSubmit=(values)=>{
     console.log("Values ",values);
+    formik.handleSubmit(values);
+    handleClose();
   }
+  
   const formik = useFormik({
     initialValues:{
       firstName:"",
@@ -74,8 +78,13 @@ export default function ProfileModal({open ,handleClose}) {
 
                 </div>
               </div>
-              <div className='space-y-3'>
-
+              <div className='space-y-3 mb-5'>
+              <TextField
+          required
+          id="outlined-required"
+          label="Required"
+          defaultValue="Hello World"
+        />
                 <TextField
                 fullWidth
                 id="outlined-helperText"
