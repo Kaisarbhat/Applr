@@ -23,6 +23,9 @@ const Sidebar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleLogout = () =>{
+    localStorage.removeItem('jwt');
+  }
 
   return (
     <Card className='card h-screen flex flex-col justify-between py-5'>
@@ -71,7 +74,7 @@ const Sidebar = () => {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
             
         </div>
