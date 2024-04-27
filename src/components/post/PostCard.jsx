@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {red} from '@mui/material/colors'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -8,7 +8,31 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {Card,CardHeader,Avatar,IconButton,CardMedia,CardActions,CardContent,Typography} from '@material-ui/core';
-const PostCard = () => {
+import { Divider } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { createCommentAction, likePostAction } from './../../Redux/Post/post_action';
+import { isLikedByReqUser } from '../../util/isLikedByReqUser';
+const PostCard = ({item}) => {
+  const dispatch = useDispatch();
+  const {post,auth} = useSelector(store => store);
+  const [showComments,setShowComments] = useState(false);
+
+  const handleShowComment =() =>{
+    setShowComments(!showComments);
+  }
+    const handleCreateComment = (content) =>{
+      const reqData = {
+            postId:item.id,
+            data :{
+              content
+            }
+      }
+      dispatch(createCommentAction(reqData))
+    };
+
+  const handleLikePost = () =>{
+    dispatch(likePostAction(item.id))
+  }
   return (
     <Card className=''>
        <CardHeader
@@ -22,32 +46,30 @@ const PostCard = () => {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Full name"
-        subheader="@username"
+        title={item.user.firstName+ " "+ item.user.lastName}
+        subheader={"@"+item.user.firstName.toLowerCase()+ "_"+ item.user.lastName.toLowerCase()}
       />
        <CardMedia
         component="img"
         height="194"
-        image="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+        image={item.image}
         alt="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+          {item.caption}
         </Typography>
       </CardContent>
       <CardActions className='flex justify-between' disableSpacing>
         <div>
-           <IconButton>
-                {true?<FavoriteIcon/>:<FavoriteBorderIcon/>}
+           <IconButton onClick={handleLikePost}>
+                {isLikedByReqUser(auth.user.id ,item)?<FavoriteIcon/>:<FavoriteBorderIcon/>}
             </IconButton> 
            <IconButton>
                 {<ShareIcon/>}
             </IconButton> 
            <IconButton>
-                {<ChatBubbleIcon/>}
+                {<ChatBubbleIcon onClick={handleShowComment}/>}
             </IconButton> 
 
         </div>
@@ -55,6 +77,31 @@ const PostCard = () => {
                 {true?<BookmarkIcon/>:<BookmarkBorderIcon/>}
             </IconButton>
       </CardActions>
+      {showComments &&  <section>
+        <div className='flex items-center space-x-5 mx-3 my-5'>
+          <Avatar sx= {{}}/>
+          <input 
+          onKeyPress={(e)=>{
+            if(e.key === "Enter"){
+              handleCreateComment(e.target.value);
+              console.log("Enter pressed",e.target.value);
+            }
+          }}
+          className='w-full outline-none bg-transparent border border-[#3b4050] rounded-full px-5 py-2 '
+          placeholder ="Write comments"
+          type="text" />
+        </div>
+        <Divider/>
+        <div className='mx-3 spce-y-2 my-5 text-xs'>
+              {item.comments?.map((comment) =>  <div className='flex items-center space-x-5 mt-2'>
+                  <Avatar style={{height:"2rem",width:"2rem",fontSize:".8rem"}}>
+                     {comment.user.firstName[0]}
+                  </Avatar>
+                  <p>{comment.content}</p>
+              </div>
+              )};
+        </div>
+      </section>}
     </Card>
   )
 }

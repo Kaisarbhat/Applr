@@ -5,6 +5,8 @@ import { IconButton } from '@material-ui/core';
 import ImageIcon from '@mui/icons-material/Image';
 import VideoFileIcon from '@mui/icons-material/VideoFile';
 import { uploadToCloudinary } from '../../util/uploadtoCloudinary';
+import { useDispatch } from 'react-redux';
+import { createPostAction } from '../../Redux/Post/post_action';
 const style = {
   position : 'absolute',
   top : '50%',
@@ -18,6 +20,7 @@ const style = {
   outline : 'none'
 };
 const CreatePostModal = ({open,handleClose}) => {
+  const dispatch = useDispatch();
   const [selectedImage,setSelectedImage] = useState();
   const [selectedVideo,setSelectedVideo] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -43,8 +46,10 @@ const CreatePostModal = ({open,handleClose}) => {
     },
     onSubmit:(values)=>{
         console.log("Values ",values);
+        dispatch(createPostAction(values))
     }
   });
+
   return (
     <Modal
     open={open}
