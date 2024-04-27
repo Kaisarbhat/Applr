@@ -18,15 +18,9 @@ export const authReducer = (state=initialState,action )=>{
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             return {...state,jwt:action.payload,loading:false,error:null};
-        case UPDATE_PROFILE_SUCCESS:
+        case UPDATE_PROFILE_SUCCESS :
             return {
-                  ...state,
-                  user: {
-                    ...state.user,
-                    firstName: action.payload.firstName,
-                    lastName: action.payload.lastName,
-                  },loading:false,error:null
-                };
+                  ...state, user: action.payload,loading:false,error:null};
         case LOGIN_FAILURE:
         case REGISTER_FAILURE:
         case GET_PROFILE_FAILURE:
