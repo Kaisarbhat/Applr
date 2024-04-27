@@ -16,7 +16,6 @@ const PostCard = ({item}) => {
   const dispatch = useDispatch();
   const {post,auth} = useSelector(store => store);
   const [showComments,setShowComments] = useState(false);
-
   const handleShowComment =() =>{
     setShowComments(!showComments);
   }
@@ -53,7 +52,7 @@ const PostCard = ({item}) => {
         component="img"
         height="194"
         image={item.image}
-        alt="Paella dish"
+        alt="image"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
