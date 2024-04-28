@@ -32,7 +32,7 @@ const MiddlePart = () => {
         <Avatar style={{height:"5rem" , width: "5rem"}}
            src =''
            >
-            <AddIcon  sx={{fontSize:"2rem"}}/>
+            <AddIcon  style={{fontSize:"2rem"}}/>
            </Avatar>
           <p>NEW</p>
            </div>
