@@ -1,8 +1,10 @@
 import { Avatar, Card, CardHeader, IconButton } from '@material-ui/core'
 import React from 'react'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { useSelector } from 'react-redux';
+const UserChatCard = ({chat}) => {
 
-const UserChatCard = () => {
+  const {message,auth} = useSelector((store)=>store);
   return (
     <Card>
         <CardHeader
@@ -15,8 +17,10 @@ const UserChatCard = () => {
             <MoreHorizIcon/>
         </IconButton>
      }
-     title = "k4151r"
-     subheader={"message"}
+     title ="k4151r"
+     subheader="inzoo"
+    //  title = {auth?.user.id === chat.users[0].id ? chat.users[1].firstName+" "+chat.users[1].lastName : chat.users[0].firstName+" "+chat.users[0].lastName }
+    //  subheader={"message"}
      >
       
     </CardHeader>

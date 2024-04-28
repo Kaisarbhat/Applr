@@ -14,7 +14,7 @@ import { createCommentAction, likePostAction } from './../../Redux/Post/post_act
 import { isLikedByReqUser } from '../../util/isLikedByReqUser';
 const PostCard = ({item}) => {
   const dispatch = useDispatch();
-  const {post,auth} = useSelector(store => store);
+  const {post,auth} = useSelector((store) => store);
   const [showComments,setShowComments] = useState(false);
   const handleShowComment =() =>{
     setShowComments(!showComments);

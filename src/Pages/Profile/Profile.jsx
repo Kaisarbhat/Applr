@@ -19,7 +19,7 @@ const repost = [1,1,1,1];
 const Profile = () => {
   const {id} = useParams();
   const [value, setValue] = React.useState('post');
-  const {auth} = useSelector(store=>store);
+  const {auth} = useSelector((store)=>store);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

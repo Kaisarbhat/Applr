@@ -13,7 +13,7 @@ const HomePage = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const jwt = localStorage.getItem("jwt");
-    const {auth} = useSelector(store=>store);
+    const {auth} = useSelector((store)=>store);
     
     useEffect(()=>{
       dispatch(getProfileAction(jwt));

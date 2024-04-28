@@ -3,6 +3,7 @@ import { Card, CardHeader } from '@material-ui/core';
 import { Avatar } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchUserAction } from './../../Redux/Auth/auth_action';
+import { createChat } from '../../Redux/Message/message_action';
 
 const SearchUser = () => {
   const [username, setUsername] = useState('');
@@ -23,7 +24,7 @@ const SearchUser = () => {
   };
 
   const handleClick = (id) => {
-    console.log('id ', id);
+    dispatch(createChat({userId:id}))
     setUsername('');
   };
 
@@ -54,8 +55,8 @@ const SearchUser = () => {
                     avatar={
                       <Avatar src="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=400" />
                     }
-                    title="k_4_1_5_1_r"
-                    subheader={"k4151r"}
+                    title={item.firstName+ " "+item.lastName}
+                    subheader={"@"+item.firstName.toLowerCase()+ "_"+item.lastName.toLowerCase()}
                   />
                 </Card>
               ))}

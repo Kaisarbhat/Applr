@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const Sidebar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const {auth} = useSelector(store=>store);
+  const {auth} = useSelector((store)=>store);
   const navigate = useNavigate();
   
   const handleNavigate = (item)=>{

@@ -14,7 +14,7 @@ const story = [11,1,1,1,1];
 
 const MiddlePart = () => {
   const dispatch = useDispatch();
-  const{post} = useSelector(store => store);
+  const{post} = useSelector((store) => store);
   const [openCreatePostModal ,setOpenCreatePostModal] = useState(false);
   const handleCloseCreatePostModal = () =>setOpenCreatePostModal(false);
   const handleOpenCreatePostModel =()=>{

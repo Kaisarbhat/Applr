@@ -8,7 +8,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { getProfileAction } from './Redux/Auth/auth_action';
 
 function App() {
-  const {auth} = useSelector(store=>store);
+  const {auth} = useSelector((store)=>store);
   const dispatch = useDispatch();;
   const jwt = localStorage.getItem("jwt");
   
