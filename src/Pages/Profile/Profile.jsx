@@ -12,14 +12,15 @@ const tabs = [
   {value:"repost",name:"RePost"},
 ];
 
-const posts = [1,1,1,1];
+
 const reels = [1,1,1,1];
-const saved = [1,1];
+const saved = [1,1,1,1,1];
 const repost = [1,1,1,1];
 const Profile = () => {
   const {id} = useParams();
   const [value, setValue] = React.useState('post');
   const {auth} = useSelector((store)=>store);
+  const {post} = useSelector((store)=>store);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -78,15 +79,15 @@ const Profile = () => {
     </Box>
            <div className='flex justify-center'>
                 {value ==="post" ? (<div className='space-y-5 w-[70%] my-10'>
-                  {posts.map((item)=><div className='border border-slate-100 rounded-md'>
-                    <PostCard/>
+                  {post.posts.map((item)=><div className='border border-slate-100 rounded-md'>
+                    <PostCard item={item}/>
                   </div>  )}
                 </div> ): value==="reels" ? (
                 <div className='flex justify-center flex-wrap  gap-2 my-5 '>
                         {reels.map((item)=><UserReelCard/>)}
                 </div>) : value==="saved" ?  (<div className='space-y-5   w-[70%] my-10'>
                   {saved.map((item)=><div className='border border-slate-100 rounded-md'>
-                    <PostCard/>
+                    <PostCard item={item}/>
                   </div>  )}
                 </div> ) :
                 <div>

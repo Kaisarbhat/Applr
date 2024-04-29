@@ -29,6 +29,7 @@ const PostCard = ({item}) => {
       dispatch(createCommentAction(reqData))
     };
 
+    console.log("PPPP",post);
   const handleLikePost = () =>{
     dispatch(likePostAction(item.id))
   }
@@ -45,8 +46,9 @@ const PostCard = ({item}) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={item.user.firstName+ " "+ item.user.lastName}
-        subheader={"@"+item.user.firstName.toLowerCase()+ "_"+ item.user.lastName.toLowerCase()}
+        title={item.user?.firstName+ " "+ item.user?.lastName}
+        subheader={"@"+item.user?.firstName.toLowerCase()+ "_"+ item.user?.lastName.toLowerCase()}
+    
       />
        <CardMedia
         component="img"
@@ -62,7 +64,7 @@ const PostCard = ({item}) => {
       <CardActions className='flex justify-between' disableSpacing>
         <div>
            <IconButton onClick={handleLikePost}>
-                {isLikedByReqUser(auth.user.id ,item)?<FavoriteIcon/>:<FavoriteBorderIcon/>}
+                {isLikedByReqUser(auth.user?.id ,item)?<FavoriteIcon/>:<FavoriteBorderIcon/>}
             </IconButton> 
            <IconButton>
                 {<ShareIcon/>}

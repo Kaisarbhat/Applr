@@ -15,6 +15,9 @@ const Sidebar = () => {
     if(item.title === "Profile"){
       navigate(`/profile/${auth?.user.id}`)
     }
+    else{
+      navigate(`/${item.path}`)
+    }
   }
 
   const handleClick = (event) => {
