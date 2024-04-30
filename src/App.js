@@ -6,6 +6,9 @@ import Message from './Pages/Messages/Message';
 import HomePage from './Pages/HomePage/HomePage';
 import { useDispatch,useSelector } from 'react-redux';
 import { getProfileAction } from './Redux/Auth/auth_action';
+import { ThemeProvider } from '@mui/material';
+import { darkTheme } from './Themes/DarkTheme';
+import { MuiThemeProvider } from '@material-ui/core';
 
 function App() {
   const {auth} = useSelector((store)=>store);
@@ -17,14 +20,14 @@ function App() {
     console.log(auth);
   },[jwt])
   return (
-    <div>
+    <MuiThemeProvider theme={darkTheme}>
 <Routes>
   <Route path ='/*' element ={auth?.user ? <HomePage/> : <Authentication/>} />
   <Route path ='/message' element ={<Message/>} />
   <Route path ="/*" element = {<Authentication/>}/>
   
 </Routes>
-    </div>
+    </MuiThemeProvider>
   );
 }
 

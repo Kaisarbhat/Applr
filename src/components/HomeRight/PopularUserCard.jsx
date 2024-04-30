@@ -4,9 +4,9 @@ import {CardHeader ,IconButton,Avatar,Button} from '@material-ui/core'
 const PopularUserCard = () => {
   return (
     <div className=''>
-        <CardHeader
+        <CardHeader style={{color:"rgb(88,199,250)"}}
         avatar={
-          <Avatar Style={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar aria-label="recipe">
             R
           </Avatar>
         }

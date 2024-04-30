@@ -1,5 +1,6 @@
+import React, { useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Grid,Backdrop,CircularProgress } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
 import WestIcon from '@mui/icons-material/West';
 import { Avatar,IconButton } from '@mui/material';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
@@ -12,6 +13,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createMessage, getAllChats } from '../../Redux/Message/message_action';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { uploadToCloudinary } from './../../util/uploadtoCloudinary';
+import SockJS from 'sockjs-client';
+import Stom from 'stompjs';
+import { API_BASED_URL } from '../../config/api';
 
 
 const Message = () => {
@@ -21,6 +25,7 @@ const Message = () => {
   const [messages,setMessages] = useState([]);
   const [selectedImage,setSelectedImage] = useState();
   const [loading,setLoading] = useState(false);
+  const chatContainerRef = useRef(null);
 
   useEffect (()=>{
     dispatch(getAllChats())
@@ -47,12 +52,50 @@ const Message = () => {
       content: value,
       image: selectedImage
     };
-    dispatch(createMessage(message));
+    dispatch(createMessage({message,sendMessageToServer}));
   };
+
     useEffect(()=>{
       setMessages([...messages,message.message]);
     },[message.message])
+   
+    useEffect(()=>{
+      if(chatContainerRef.current){
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight; 
+      }
+    },[messages])
+
+  const [stompClient , setStompClient]  = useState();
+  useEffect(()=>{
+    const sock = new SockJS(`${API_BASED_URL}/ws`);
+    const stomp = Stom.over(sock);
+    setStompClient(stomp);
+    stomp.connect({},onConnect,onERR )
+  },[]);
+
+  const onConnect = ()=>{
+    console.log("Connected Websocket")
+  }
+  const onERR = ()=>{
+    console.log("ERROR WebSocket")
+  }
+ const onMessageReceived = (payload)=>{
+  const receivedMessage = JSON.parse(payload.body);
+  console.log("Received Message ",receivedMessage);
+  setMessages([...messages,receivedMessage]);
+ }
+  useEffect(()=>{
+    if(stompClient && auth?.user && currentChat){
+      const subscription = stompClient.subscribe(`/users/${currentChat.id}/private`,onMessageReceived)
+    }
+  })
   
+  const sendMessageToServer = (newMesssage) =>{
+    if(stompClient && newMesssage){
+      stompClient.send(`/app/chat/${currentChat?.id.toString()}`,{},JSON.stringify(newMesssage))
+    }
+  }
+
   return (
     <div>
       <Grid container className='h-screen overflow-y-hidden'>
@@ -98,13 +141,13 @@ const Message = () => {
                               </IconButton>
                         </div>
                     </div>
-                    <div className='hideScrollbar overflow-y-scroll h-[82vh] px-2 space-y-5 py-5'>
+                    <div ref = {chatContainerRef}className='hideScrollbar overflow-y-scroll h-[77vh] px-2 space-y-3 py-5'>
                       {messages.map((item)=><ChatMessage item = {item}/>)}
                     </div>
 
-                  <div className='sticky bottom-0  border-l'>
-                          {selectedImage && <img className='w-[5rem] h-[5rem] object-cover px-2' src={selectedImage} alt="" />}
-                        <div className='py-5 flex items-center justify-center space-x-5'>
+                  <div className='sticky bottom-0 border-l'>
+                          {selectedImage && <img className='w-[8rem] h-[8rem] object-cover px-2' src={selectedImage} alt="" />}
+                        <div className='py-5 flex items-center justify-center space-x-5 '>
                             <input 
                             onKeyPress={(e)=>{
                               if(e.key === "Enter" && e.target.value){

@@ -1,10 +1,11 @@
-import React from 'react';
+import  React, { useEffect } from 'react';
 import { Avatar,Button,Box,Tab,Tabs, Card} from '@material-ui/core';
 import PostCard from '../../components/post/PostCard';
 import UserReelCard from '../../components/Reels/UserReelCard';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ProfileModal from './ProfileModal';
+import { getAllPostAction } from '../../Redux/Post/post_action';
 const tabs = [
   {value:"post",name:"Post"},
   {value:"reels",name:"Reels"},
@@ -16,17 +17,18 @@ const tabs = [
 const reels = [1,1,1,1];
 const saved = [1,1,1,1,1];
 const repost = [1,1,1,1];
+const posts = [1,1,1,1,1];
 const Profile = () => {
   const {id} = useParams();
   const [value, setValue] = React.useState('post');
-  const {auth} = useSelector((store)=>store);
-  const {post} = useSelector((store)=>store);
+  const {post,auth} = useSelector((store) => store);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const [open, setOpen] = React.useState(false);
   const handleOpenProfileModal = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
   return (
     <Card className='my-10 w-[70%]'>
 

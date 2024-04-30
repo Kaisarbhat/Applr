@@ -10,17 +10,16 @@ const UserChatCard = ({chat}) => {
         <CardHeader
       avatar = {
         <Avatar style = {{width:"3.5rem",
-     height:"3.5rem",fontSize:"1.5rem", bgcolor:"#191c29", color:"rgb(88,199,250)" }}src='https://images.pexels.com/photos/810775/pexels-photo-810775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'/>
+     height:"3.5rem",fontSize:"1.5rem", bgcolor:"#191c29", color:"rgb(88,199,250)" }}src={chat.users[0].image}/>
      }
      action={
         <IconButton>
             <MoreHorizIcon/>
         </IconButton>
      }
-     title ="k4151r"
-     subheader="inzoo"
-    //  title = {auth?.user.id === chat.users[0].id ? chat.users[1].firstName+" "+chat.users[1].lastName : chat.users[0].firstName+" "+chat.users[0].lastName }
-    //  subheader={"message"}
+
+     title = {auth?.user.id === chat.users[0].id ? chat.users[1].firstName+" "+chat.users[1].lastName : chat.users[0].firstName+" "+chat.users[0].lastName }
+     subheader={"message"}
      >
       
     </CardHeader>
